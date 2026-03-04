@@ -1,0 +1,28 @@
+# Use with an Ingress controller (e.g. nginx-ingress, Rancher).
+# Set spec.rules[0].host and TLS per cluster.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nexus
+  namespace: nexus
+  labels:
+    app.kubernetes.io/name: nexus
+  annotations:
+    # nginx-ingress example:
+    # nginx.ingress.kubernetes.io/proxy-body-size: "0"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: nexus.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: nexus-web
+                port:
+                  number: 80
+  # tls:
+  #   - hosts: [nexus.local]
+  #     secretName: nexus-tls

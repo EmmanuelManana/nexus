@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nexus-config
+  namespace: nexus
+  labels:
+    app.kubernetes.io/name: nexus
+data:
+  ASPNETCORE_URLS: "http://+:5000"
+  ASPNETCORE_ENVIRONMENT: "Production"

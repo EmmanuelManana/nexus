@@ -1,0 +1,28 @@
+# Example Argo CD Application. Adjust repo URL and path to your Git source.
+# Apply: kubectl apply -f kubernetes/argocd-application.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nexus
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/YOUR_ORG/nexus.git
+    targetRevision: main
+    path: kubernetes
+    kustomize:
+      images:
+        - nexus-api:YOUR_REGISTRY/nexus-api:latest
+        - nexus-web:YOUR_REGISTRY/nexus-web:latest
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: nexus
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

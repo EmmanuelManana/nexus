@@ -1,0 +1,25 @@
+{
+  "profiles": {
+    "Nexus.Api": {
+      "commandName": "Project",
+      "dotnetRun": true,
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "applicationUrl": "http://localhost:5000",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "Nexus.Api (with migrations)": {
+      "commandName": "Project",
+      "dotnetRun": true,
+      "commandLineArgs": "m",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "applicationUrl": "http://localhost:5000",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
