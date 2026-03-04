@@ -145,7 +145,7 @@ flowchart LR
 - **InMemory** – No real DB; data is lost on restart. Acceptable for the assignment; production would use a persistent store.  
 - **Search/sort** – Implemented in the API (query params `q` and `sort`). Keeps the SPA simple and avoids loading all data client-side.  
 - **Client-side validation** – Mirrored where practical (required title, status/priority enums, optional due date). Full rules stay on the server; 400 + ProblemDetails drive error display.  
-- **Single list context** – One global list state. For a small take-home this is enough; a larger app might split list vs. detail contexts or use a data library.
+- **Single list context** – One global list state. For this scope it’s enough; a larger app might split list vs. detail contexts or use a data library.
 
 ---
 

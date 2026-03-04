@@ -1,6 +1,6 @@
 # Nexus – Full-Stack Task Tracker
 
-A small **Task Tracker** built for the LexisNexis Full-Stack Engineer assessment. It includes a **C# ASP.NET Core 8 Web API** and a **TypeScript React SPA** that consumes it.
+A small **Task Tracker** with a **C# ASP.NET Core 8 Web API** and a **TypeScript React SPA** that consumes it.
 
 ## Tech stack
 
