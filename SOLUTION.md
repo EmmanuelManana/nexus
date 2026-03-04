@@ -17,7 +17,7 @@ flowchart LR
     Store[(InMemory)]
   end
   Browser --> SPA
-  SPA -->|REST /api/tasks| API
+  SPA -->|"REST /api/tasks"| API
   API --> Store
 ```
 
@@ -67,7 +67,7 @@ flowchart LR
   Pages --> Hooks
   Context --> Client
   Hooks --> Client
-  Client -->|fetch| API[/api/tasks]
+  Client -->|fetch| API["/api/tasks"]
 ```
 
 ### Kubernetes (deploy)
