@@ -13,7 +13,8 @@ interface UseTaskOptions {
  */
 export function useTask(id: number | null, options?: UseTaskOptions) {
   const [task, setTask] = useState<Task | null>(null);
-  const [loading, setLoading] = useState(!!id);
+  // Start in loading state when we have an id to fetch; avoids flash of "not loading" before fetch.
+  const [loading, setLoading] = useState(() => Boolean(id));
   const [error, setError] = useState<string | null>(null);
 
   const refetch = useCallback(async () => {

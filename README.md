@@ -28,6 +28,8 @@ dotnet run
 - API: **http://localhost:5000**
 - Swagger: **http://localhost:5000/swagger**
 
+**JetBrains Rider:** Open **`Nexus.sln`** (in the repo root). Set **Nexus.Api** as the startup project (right‑click → Set as Startup Project), then Run (Shift+F10) or Debug (F5). **Before rebuilding:** stop the running app (Stop button or Shift+F5). Otherwise MSBuild will report "file is locked by Nexus.Api" because the process holds the DLLs—stop the run, then build again.
+
 ### Run the SPA
 
 ```bash

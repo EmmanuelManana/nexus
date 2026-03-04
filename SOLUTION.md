@@ -142,10 +142,26 @@ flowchart LR
 
 ---
 
-## Trade-offs
+## Trade-offs: advantages and disadvantages
+
+The following table summarises the main design choices, their benefits, and their drawbacks.
+
+| Area | Choice | Advantages | Disadvantages |
+|------|--------|------------|----------------|
+| **Persistence** | EF Core **InMemory** | No DB setup; fast startup; easy to run tests and demos; seed data on startup. | Data lost on restart; not suitable for production; no concurrency or durability guarantees. |
+| **Search / sort** | Implemented in the **API** (`q`, `sort` query params) | SPA stays simple; no need to load all tasks client-side; consistent behaviour and one source of truth; scales better as data grows. | Every filter/sort change hits the network; less instant feedback than pure client-side filtering. |
+| **Validation** | **Server-first** (validator + ProblemDetails), client mirrors where practical | Single source of truth on server; 400 + ProblemDetails give consistent, machine-readable errors; client can show `detail` and `errors` without duplicating full rules. | Some duplication (e.g. required title, enums); client can’t guarantee every rule without reimplementing server logic. |
+| **Backend structure** | **Layered** (Domain → Application → Infrastructure → Api) | Clear separation of concerns; testable services; easy to swap persistence (e.g. InMemory → SQL) without touching controllers. | More projects and indirection; can be more than needed for a very small API. |
+| **Frontend state** | **Single TasksContext** (Context API) | One place for list state; refetch and search/sort shared across list and create/edit; no extra data library. | All list consumers re-render on any context change; at scale you might split list vs. detail or use a data/cache layer (e.g. React Query). |
+| **Frontend data** | **Custom hooks** (useTask, useCreateTask, useUpdateTask) | Encapsulates loading/error and API calls; reusable from any page; keeps components thin. | No built-in caching or request deduplication; each mount can trigger its own fetch. |
+| **Errors** | **RFC 7807 ProblemDetails** + global exception middleware | Standard format; `detail` and `errors` map well to UI; one middleware for consistent logging and responses. | Clients must understand the shape; not all clients use ProblemDetails by default. |
+| **Config** | **Options pattern** (appsettings sections) + **env** for frontend API URL | CORS, Swagger, URLs configurable without code changes; 12-factor style for API base URL in frontend. | Multiple places to look (appsettings, env files, K8s ConfigMap); env must be set at build time for Vite. |
+| **K8s / deploy** | **Kustomize**, optional Ingress, **Argo CD**-friendly | Single `kubectl apply -k` or GitOps; replicas, probes, PDBs for availability; web proxy keeps SPA and API behind one ingress. | More YAML to maintain; InMemory means each API pod has its own data (no shared persistence). |
+
+### Summary
 
 - **InMemory** – No real DB; data is lost on restart. Acceptable for the assignment; production would use a persistent store.  
-- **Search/sort** – Implemented in the API (query params `q` and `sort`). Keeps the SPA simple and avoids loading all data client-side.  
+- **Search/sort in API** – Keeps the SPA simple and avoids loading all data client-side.  
 - **Client-side validation** – Mirrored where practical (required title, status/priority enums, optional due date). Full rules stay on the server; 400 + ProblemDetails drive error display.  
 - **Single list context** – One global list state. For this scope it’s enough; a larger app might split list vs. detail contexts or use a data library.
 
