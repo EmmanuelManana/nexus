@@ -72,6 +72,7 @@ nexus/
 │   │   └── utils/            # mapApiErrorToMessage (+ test)
 │   └── ...
 ├── README.md
+├── KUBERNETES.md             # Step-by-step Kubernetes deployment guide
 └── SOLUTION.md               # Design, trade-offs, debugging notes
 ```
 
@@ -133,6 +134,8 @@ Migrations are enabled and live in **Nexus.Infrastructure/Migrations**. The app 
 
 **Optional deployment step.** The app is containerized and deployable to Kubernetes with **scalability** and **high availability** (multiple replicas, resource limits, liveness/readiness probes, PodDisruptionBudgets). Use this when you want to run via Docker or a Kubernetes cluster; local `dotnet run` and `npm run dev` are sufficient for development.
 
+**→ For a full step-by-step guide, see [KUBERNETES.md](KUBERNETES.md).**
+
 ### Build images
 
 From the **repository root**, build with Docker (or Rancher Desktop / nerdctl):
@@ -144,6 +147,13 @@ docker build -t nexus-api:latest -f backend/Nexus.Api/Dockerfile backend
 # Frontend (context: frontend/)
 docker build -t nexus-web:latest frontend
 ```
+
+**Rancher Desktop:** If you see `error during connect ... dockerDesktopLinuxEngine ... The system cannot find the file specified`, the `docker` CLI is trying to use Docker Desktop’s engine, which isn’t running. Use either:
+
+- **Option A – Use nerdctl** (recommended when Rancher uses containerd):  
+  Replace `docker` with `nerdctl` in the commands above (e.g. `nerdctl build -t nexus-api:latest -f backend/Nexus.Api/Dockerfile backend`). Then use the [Local Kubernetes (Rancher Desktop)](#local-kubernetes-eg-rancher-desktop) steps below to load images and deploy.
+- **Option B – Use Docker CLI with Rancher:**  
+  In Rancher Desktop: **Settings → Container Engine** → choose **dockerd (moby)**. Apply and restart. After that, `docker` will talk to Rancher’s engine and `docker build` will work.
 
 For a **registry** (so Rancher/Argo CD can pull):
 
@@ -189,7 +199,7 @@ kustomize edit set image nexus-api=YOUR_REGISTRY/nexus-api:latest nexus-web=YOUR
 kubectl apply -k .
 ```
 
-Set **`imagePullPolicy`** and image names in the deployments if your cluster pulls from a private registry (e.g. `imagePullPolicy: IfNotPresent` or `Always` and image like `your-registry.io/nexus-api:v1.0.0`).
+When deploying from a **registry**, override **`imagePullPolicy`** to `IfNotPresent` or `Always` (the default in the repo is `Never` for local nerdctl load). Set image names to your registry (e.g. `your-registry.io/nexus-api:v1.0.0`).
 
 ### Argo CD
 
@@ -208,9 +218,15 @@ If you build with **nerdctl** and load images into the cluster (no registry), us
 ```bash
 nerdctl build -t nexus-api:latest -f backend/Nexus.Api/Dockerfile backend
 nerdctl build -t nexus-web:latest frontend
-nerdctl save nexus-api:latest -o api.tar && nerdctl -n k8s.io load -i api.tar
-nerdctl save nexus-web:latest -o web.tar && nerdctl -n k8s.io load -i web.tar
+nerdctl save nexus-api:latest -o api.tar
+nerdctl -n k8s.io load -i api.tar
+nerdctl save nexus-web:latest -o web.tar
+nerdctl -n k8s.io load -i web.tar
 kubectl apply -k kubernetes
 kubectl port-forward -n nexus svc/nexus-web 3000:80
 # Open http://localhost:3000
 ```
+
+In **PowerShell**, run the save/load commands as separate lines (or use `;` instead of `&&`); `&&` is not supported in Windows PowerShell 5.x.
+
+The manifests use **`imagePullPolicy: Never`** so the cluster uses only the images you loaded (no pull). If pods stay **Pending**, run `kubectl get pods -n nexus` and `kubectl describe pod -n nexus <pod-name>` and check the **Events** section (e.g. image not found, or scheduling). After fixing, re-run `kubectl apply -k kubernetes` and wait for pods to be Running before port-forwarding.
