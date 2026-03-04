@@ -42,6 +42,10 @@ npm run dev
 
 Configure the API base URL (optional): copy `frontend/.env.example` to `frontend/.env` and set `VITE_API_BASE_URL=http://localhost:5000` if your API runs on a different port.
 
+### Optional: Deploy with Kubernetes
+
+To run the app in containers or on a Kubernetes cluster (e.g. Rancher, Argo CD), see **[Docker and Kubernetes](#docker-and-kubernetes-rancher--argo-cd)** below. You can build Docker images and deploy with `kubectl apply -k kubernetes` or Argo CD; this step is optional for local development.
+
 ### CORS
 
 The API allows origins from **appsettings.json** → `Cors:AllowedOrigins` (default: `http://localhost:5173`, `http://localhost:3000`). Adjust if your SPA runs on another port.
@@ -125,9 +129,9 @@ Migrations are enabled and live in **Nexus.Infrastructure/Migrations**. The app 
    ```
    (Install the [EF Core tools](https://learn.microsoft.com/en-us/ef/core/cli/dotnet) if needed: `dotnet tool install --global dotnet-ef`.)
 
-## Docker and Kubernetes (Rancher / Argo CD)
+## Docker and Kubernetes (Rancher / Argo CD) *(optional)*
 
-The app is containerized and deployable to Kubernetes with **scalability** and **high availability** (multiple replicas, resource limits, liveness/readiness probes, PodDisruptionBudgets).
+**Optional deployment step.** The app is containerized and deployable to Kubernetes with **scalability** and **high availability** (multiple replicas, resource limits, liveness/readiness probes, PodDisruptionBudgets). Use this when you want to run via Docker or a Kubernetes cluster; local `dotnet run` and `npm run dev` are sufficient for development.
 
 ### Build images
 
