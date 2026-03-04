@@ -1,0 +1,16 @@
+c:\Users\emana\Documents\code\nexus\backend\Nexus.Application\obj\Debug\net8.0\Nexus.Application.csproj.AssemblyReference.cache
+c:\Users\emana\Documents\code\nexus\backend\Nexus.Application\obj\Debug\net8.0\Nexus.Application.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\emana\Documents\code\nexus\backend\Nexus.Application\obj\Debug\net8.0\Nexus.Application.AssemblyInfoInputs.cache
+c:\Users\emana\Documents\code\nexus\backend\Nexus.Application\obj\Debug\net8.0\Nexus.Application.AssemblyInfo.cs
+c:\Users\emana\Documents\code\nexus\backend\Nexus.Application\obj\Debug\net8.0\Nexus.Application.csproj.CoreCompileInputs.cache
+c:\Users\emana\Documents\code\nexus\backend\Nexus.Application\obj\Debug\net8.0\Nexus.Application.sourcelink.json
+c:\Users\emana\Documents\code\nexus\backend\Nexus.Application\bin\Debug\net8.0\Nexus.Application.deps.json
+c:\Users\emana\Documents\code\nexus\backend\Nexus.Application\bin\Debug\net8.0\Nexus.Application.dll
+c:\Users\emana\Documents\code\nexus\backend\Nexus.Application\bin\Debug\net8.0\Nexus.Application.pdb
+c:\Users\emana\Documents\code\nexus\backend\Nexus.Application\bin\Debug\net8.0\Nexus.Domain.dll
+c:\Users\emana\Documents\code\nexus\backend\Nexus.Application\bin\Debug\net8.0\Nexus.Domain.pdb
+c:\Users\emana\Documents\code\nexus\backend\Nexus.Application\obj\Debug\net8.0\Nexus.Ap.EDFDCF09.Up2Date
+c:\Users\emana\Documents\code\nexus\backend\Nexus.Application\obj\Debug\net8.0\Nexus.Application.dll
+c:\Users\emana\Documents\code\nexus\backend\Nexus.Application\obj\Debug\net8.0\refint\Nexus.Application.dll
+c:\Users\emana\Documents\code\nexus\backend\Nexus.Application\obj\Debug\net8.0\Nexus.Application.pdb
+c:\Users\emana\Documents\code\nexus\backend\Nexus.Application\obj\Debug\net8.0\ref\Nexus.Application.dll

@@ -22,7 +22,7 @@ public static class SeedDataConfiguration
             {
                 Title = "Design API contract",
                 Description = "Define REST endpoints and request/response shapes for the Task Tracker API.",
-                Status = TaskStatus.Done,
+                Status = Domain.TaskStatus.Done,
                 Priority = TaskPriority.High,
                 DueDate = utc.AddDays(-2),
                 CreatedAt = utc.AddDays(-5)
@@ -31,7 +31,7 @@ public static class SeedDataConfiguration
             {
                 Title = "Implement task list view",
                 Description = "Build the React task list with search and sort.",
-                Status = TaskStatus.InProgress,
+                Status = Domain.TaskStatus.InProgress,
                 Priority = TaskPriority.High,
                 DueDate = utc.AddDays(1),
                 CreatedAt = utc.AddDays(-3)
@@ -40,7 +40,7 @@ public static class SeedDataConfiguration
             {
                 Title = "Write unit tests",
                 Description = "Add xUnit tests for API and frontend utilities.",
-                Status = TaskStatus.New,
+                Status = Domain.TaskStatus.New,
                 Priority = TaskPriority.Medium,
                 DueDate = utc.AddDays(3),
                 CreatedAt = utc.AddDays(-1)
@@ -49,7 +49,7 @@ public static class SeedDataConfiguration
             {
                 Title = "Document SOLUTION.md",
                 Description = "Describe design decisions and debugging notes.",
-                Status = TaskStatus.New,
+                Status = Domain.TaskStatus.New,
                 Priority = TaskPriority.Low,
                 DueDate = null,
                 CreatedAt = utc

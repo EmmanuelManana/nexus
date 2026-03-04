@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.11" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.11" />
     <ProjectReference Include="..\Nexus.Domain\Nexus.Domain.csproj" />
     <ProjectReference Include="..\Nexus.Application\Nexus.Application.csproj" />

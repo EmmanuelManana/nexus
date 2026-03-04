@@ -74,6 +74,4 @@ public static class TaskRequestValidator
     }
 }
 
-namespace Nexus.Api.Validation;
-
 public record ValidationError(string Field, string Message);

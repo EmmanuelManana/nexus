@@ -12,7 +12,7 @@ namespace Nexus.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     [Migration("20250304000000_InitialCreate")]
-    partial class InitialCreate
+    partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -81,3 +81,5 @@ namespace Nexus.Infrastructure.Persistence.Migrations
         {
             migrationBuilder.DropTable(name: "Tasks");
         }
+    }
+}

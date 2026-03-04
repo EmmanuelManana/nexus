@@ -1,3 +1,4 @@
+using Nexus.Application.Contracts;
 using Nexus.Application.Dtos;
 using Nexus.Domain;
 
@@ -55,12 +56,12 @@ public class TaskService : ITaskService
     public async Task<bool> DeleteAsync(int id, CancellationToken cancellationToken = default) =>
         await _repository.DeleteAsync(id, cancellationToken);
 
-    private static TaskStatus ParseStatus(string value) => value?.ToLowerInvariant() switch
+    private static Domain.TaskStatus ParseStatus(string value) => value?.ToLowerInvariant() switch
     {
-        "new" => TaskStatus.New,
-        "inprogress" => TaskStatus.InProgress,
-        "done" => TaskStatus.Done,
-        _ => TaskStatus.New
+        "new" => Domain.TaskStatus.New,
+        "inprogress" => Domain.TaskStatus.InProgress,
+        "done" => Domain.TaskStatus.Done,
+        _ => Domain.TaskStatus.New
     };
 
     private static TaskPriority ParsePriority(string value) => value?.ToLowerInvariant() switch

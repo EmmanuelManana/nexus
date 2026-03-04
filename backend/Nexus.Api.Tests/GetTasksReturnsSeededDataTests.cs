@@ -3,6 +3,7 @@ using System.Net.Http.Json;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Nexus.Application.Dtos;
+using Xunit;
 
 namespace Nexus.Api.Tests;
 
@@ -30,7 +31,7 @@ public class GetTasksReturnsSeededDataTests : IClassFixture<WebApplicationFactor
         var tasks = JsonSerializer.Deserialize<List<TaskResponse>>(json, options);
         Assert.NotNull(tasks);
         Assert.True(tasks.Count >= 4, "Expected at least 4 seeded tasks.");
-        Assert.True(tasks.Any(t => t.Title.Contains("Design API", StringComparison.OrdinalIgnoreCase)));
+        Assert.Contains(tasks, t => t.Title.Contains("Design API", StringComparison.OrdinalIgnoreCase));
     }
 
     [Fact]

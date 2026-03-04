@@ -1,0 +1,12 @@
+c:\Users\emana\Documents\code\nexus\backend\Nexus.Domain\bin\Debug\net8.0\Nexus.Domain.deps.json
+c:\Users\emana\Documents\code\nexus\backend\Nexus.Domain\bin\Debug\net8.0\Nexus.Domain.dll
+c:\Users\emana\Documents\code\nexus\backend\Nexus.Domain\bin\Debug\net8.0\Nexus.Domain.pdb
+c:\Users\emana\Documents\code\nexus\backend\Nexus.Domain\obj\Debug\net8.0\Nexus.Domain.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\emana\Documents\code\nexus\backend\Nexus.Domain\obj\Debug\net8.0\Nexus.Domain.AssemblyInfoInputs.cache
+c:\Users\emana\Documents\code\nexus\backend\Nexus.Domain\obj\Debug\net8.0\Nexus.Domain.AssemblyInfo.cs
+c:\Users\emana\Documents\code\nexus\backend\Nexus.Domain\obj\Debug\net8.0\Nexus.Domain.csproj.CoreCompileInputs.cache
+c:\Users\emana\Documents\code\nexus\backend\Nexus.Domain\obj\Debug\net8.0\Nexus.Domain.sourcelink.json
+c:\Users\emana\Documents\code\nexus\backend\Nexus.Domain\obj\Debug\net8.0\Nexus.Domain.dll
+c:\Users\emana\Documents\code\nexus\backend\Nexus.Domain\obj\Debug\net8.0\refint\Nexus.Domain.dll
+c:\Users\emana\Documents\code\nexus\backend\Nexus.Domain\obj\Debug\net8.0\Nexus.Domain.pdb
+c:\Users\emana\Documents\code\nexus\backend\Nexus.Domain\obj\Debug\net8.0\ref\Nexus.Domain.dll
