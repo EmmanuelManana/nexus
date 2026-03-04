@@ -20,7 +20,7 @@ spec:
       containers:
         - name: web
           image: nexus-web:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Never
           ports:
             - containerPort: 80
               name: http
