@@ -150,7 +150,7 @@ docker push YOUR_REGISTRY/nexus-web:latest
 
 ### Deploy with Kubernetes
 
-Manifests are in **`kubernetes/`** (Kustomize-based), aligned with the [weather-rating](https://github.com/your-org/weather-rating) layout:
+Manifests are in **`kubernetes/`** (Kustomize-based).
 
 | Resource | Purpose |
 |----------|---------|
@@ -161,6 +161,16 @@ Manifests are in **`kubernetes/`** (Kustomize-based), aligned with the [weather-
 | `backend-service.yaml` / `frontend-service.yaml` | ClusterIP services |
 | `ingress.yaml` | Optional; host `nexus.local` → web service |
 | `kustomization.yaml` | Kustomize base; override `images` for your registry |
+
+#### Kubernetes infrastructure
+
+- **Namespace** (`nexus`) – Isolates all app resources.
+- **ConfigMap** (`nexus-config`) – Non-secret config for the API: `ASPNETCORE_URLS`, `ASPNETCORE_ENVIRONMENT`. Injected into API pods via `envFrom`.
+- **Backend Deployment** (`nexus-api`) – Runs the API image (port 5000). Two replicas for availability. Resource requests/limits (128Mi–512Mi memory, 100m–500m CPU). Liveness and readiness probes on `/health`. **PodDisruptionBudget** keeps at least one API pod available during voluntary disruptions (e.g. node drain).
+- **Frontend Deployment** (`nexus-web`) – Runs the web image (port 80, nginx). Two replicas. Probes on `/`. **PodDisruptionBudget** keeps at least one web pod available. Nginx proxies `/api` and `/health` to the `nexus-api` service.
+- **Services** – `nexus-api` (ClusterIP 5000) and `nexus-web` (ClusterIP 80) give stable DNS and load-balancing to the pods. Web pods call the API via `http://nexus-api:5000`.
+- **Ingress** – Optional. Routes host `nexus.local` (or your host) to `nexus-web:80`. Requires an Ingress controller (e.g. nginx-ingress). TLS can be added via annotations or a TLS block.
+- **Kustomization** – Declares all resources and default image names/tags; override `images` for your registry so `kubectl apply -k` or Argo CD use the correct images.
 
 **Apply (after pushing images to a registry the cluster can pull):**
 

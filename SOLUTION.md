@@ -83,6 +83,8 @@ flowchart LR
   Ingress --> Web
 ```
 
+**Infrastructure (in `kubernetes/`):** All resources live in the **nexus** namespace. **ConfigMap** supplies the API with `ASPNETCORE_URLS` and environment. **nexus-api** and **nexus-web** are Deployments (2 replicas each) with resource limits, liveness/readiness probes (`/health` for API, `/` for web), and PodDisruptionBudgets (minAvailable: 1). ClusterIP **Services** expose the API on port 5000 and the web on 80; the web container proxies `/api` to the API service. Optional **Ingress** sends external traffic to the web service. **Kustomize** wires resources and image names for `kubectl apply -k` or Argo CD.
+
 ---
 
 ## Design decisions
