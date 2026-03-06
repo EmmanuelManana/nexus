@@ -44,7 +44,7 @@ Configure the API base URL (optional): copy `frontend/.env.example` to `frontend
 
 ### Optional: Deploy with Kubernetes
 
-To run the app in containers or on a Kubernetes cluster (e.g. Rancher, Argo CD), see **[Docker and Kubernetes](#docker-and-kubernetes-rancher--argo-cd)** below. You can build Docker images and deploy with `kubectl apply -k kubernetes` or Argo CD; this step is optional for local development.
+To run the app in containers or on a Kubernetes cluster (e.g. Rancher, Argo CD), see **[Docker and Kubernetes](#docker-and-kubernetes-rancher--argo-cd)** below. For a **simple, step-by-step guide** that anyone can follow (including non-technical users), see **[RUN-ON-RANCHER-SIMPLE.md](RUN-ON-RANCHER-SIMPLE.md)** — it explains how to run the app locally on Rancher Desktop and Kubernetes, one step at a time.
 
 ### CORS
 
@@ -73,6 +73,7 @@ nexus/
 │   └── ...
 ├── README.md
 ├── KUBERNETES.md             # Step-by-step Kubernetes deployment guide
+├── RUN-ON-RANCHER-SIMPLE.md  # Simple guide: run the app on Rancher Desktop (non-technical)
 └── SOLUTION.md               # Design, trade-offs, debugging notes
 ```
 
